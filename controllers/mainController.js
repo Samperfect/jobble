@@ -7,5 +7,6 @@ homepageController = (req, res) => {
 listingsController = (req, res) => {
   res.render('listings');
 };
+
 // exporting the controller modules
 module.exports = { homepageController, listingsController };
