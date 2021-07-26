@@ -7,11 +7,10 @@ const userRouter = express.Router({ strict: true });
 const user = require('../controllers/userController');
 
 // defining the routes
-userRouter.get('/employer/register', user.registerController('Employer'));
-userRouter.get('/employee/register', user.registerController('Employee'));
-userRouter.get('/employer/login', user.loginController);
-userRouter.get('/employee/login', user.loginController);
+userRouter.get('/register', user.registerController);
+userRouter.get('/login', user.loginController);
 userRouter.post('/register', user.registerUser);
+userRouter.post('/login', user.loginUser);
 
 // exporting the mainRouter
 module.exports = { userRouter };

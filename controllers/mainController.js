@@ -1,6 +1,6 @@
 // defining the homepage controller function
 homepageController = (req, res) => {
-  res.render('home');
+  res.render('login');
 };
 
 // the listings controller function

@@ -4,10 +4,8 @@ const { exit } = require('process');
 const { render } = require('ejs');
 
 // defining the employer resgier controller
-const registerController = (user) => {
-  return (req, res) => {
-    res.render('register', { user: user });
-  };
+const registerController = (req, res) => {
+  res.render('register');
 };
 
 // defining the employer resgier controller
@@ -22,7 +20,14 @@ const registerUser = async (req, res) => {
   // getting the form data
   const body = req.body;
   // checking for errors in user data
-  if (!body.fname || !body.lname || !body.email || !body.password) {
+  if (
+    !body.fname ||
+    !body.lname ||
+    !body.email ||
+    !body.password ||
+    !body.phone ||
+    !body.address
+  ) {
     errors.gen = "This field can't be empty";
   }
   if (body.password.length < 10) {
@@ -43,8 +48,6 @@ const registerUser = async (req, res) => {
     return;
   }
 
-  // adding the user role to the body object
-  body.role = req.query.role.toLowerCase();
   // hashing the password
   bcrypt.hash(body.password, 10, (error, hash) => {
     if (error) throw error;
@@ -57,11 +60,44 @@ const registerUser = async (req, res) => {
     } catch (error) {
       errors.gen = 'Something went wrong';
       res.redirect(`${req.query.role.toLowerCase()}/register`);
+      return;
     }
+    req.flash('success_msg', 'Account registered successfully!');
     res.redirect(`${req.query.role.toLowerCase()}/login`);
     return;
   });
+  return;
+};
 
+// login user controller
+const loginUser = async (req, res) => {
+  // creating the error object
+  errors = {};
+  // getting the form data
+  const body = req.body;
+  console.log(body);
+  // checking for errors in user data
+  if (!body.email || !body.password) {
+    errors.gen = "This field can't be empty";
+  }
+  if (Object.keys(errors).length > 0) {
+    res.redirect(`./login`);
+    return;
+  }
+  // checking for errors in user data end
+
+  // checking if the user exits already
+  existing = await User.findOne({ email: body.email });
+
+  if (!existing) {
+    //   errors.email = 'That account does not exist';
+    req.flash('error_msg', 'That account does not exist');
+    res.redirect(`./login`);
+    return;
+  }
+
+  console.log(existing);
+  res.redirect('/');
   return;
 };
 
@@ -76,4 +112,5 @@ module.exports = {
   loginController,
   registerUser,
   logoutUser,
+  loginUser,
 };

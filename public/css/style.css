@@ -15759,7 +15759,7 @@ Login Section
 
 .login-section .outer-box{
     position: relative;
-    margin-left: 42%;
+    /* margin-left: 42%; */
     width: 58%;
     display: -webkit-box;
     display: -ms-flexbox;

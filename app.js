@@ -49,7 +49,11 @@ app.use(express.json());
 // setting up middlewares end
 
 // requiring external middile wares
-require('./middlewares/utils');
+const utils = require('./middlewares/utils');
+
+app.use(utils.new_session);
+app.use(flash());
+app.use(utils.messages);
 
 // creating an express https server
 const server = https.createServer({ key: key, cert: cert }, app);
@@ -58,7 +62,7 @@ const server = https.createServer({ key: key, cert: cert }, app);
 app.use(mainRouter);
 
 // Everything relating to the user compoents
-app.use('/users', userRouter);
+app.use('/user', userRouter);
 
 // handling 404 errors
 app.all('*', (req, res) => {

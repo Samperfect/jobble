@@ -19,9 +19,16 @@
             <div class="nav-outer">
               <div class="logo-box">
                 <div class="logo">
-                  <a href="/"
-                    ><img src="../../../../images/logo-2.svg" alt="" title="" />
-                  </a>
+                  <a
+                    href="/"
+                    style="
+                      padding-left: 0.6rem;
+                      font-weight: bolder;
+                      font-size: 1.3rem;
+                      color: black;
+                    "
+                    >Kris Gardening Service</a
+                  >
                 </div>
               </div>
             </div>
@@ -31,16 +38,15 @@
         <!-- Mobile Header -->
         <div class="mobile-header">
           <div class="logo">
-            <a href="/"
-              ><img src="../../../../images/favicon.png" alt="" title="" /><span
-                style="
-                  padding-left: 0.6rem;
-                  font-weight: bolder;
-                  font-size: 1.3rem;
-                  color: black;
-                "
-                >Joble</span
-              ></a
+            <a
+              href="/"
+              style="
+                padding-left: 0.6rem;
+                font-weight: bolder;
+                font-size: 1.3rem;
+                color: black;
+              "
+              >Kris Gardening Service</a
             >
           </div>
 
@@ -64,13 +70,15 @@
 
       <!-- Info Section -->
       <div class="login-section">
-        <div
+        <!-- <div
           class="image-layer"
           style="background-image: url(../../images/background/12.jpg)"
-        ></div>
+        ></div> -->
         <div class="outer-box">
           <!-- Login Form -->
           <div class="login-form default-form">
+            <%- include('./partials/flash') %>
+
             <div class="form-inner">
               <h3>Login to Joble</h3>
               <!--Login Form-->
@@ -79,10 +87,14 @@
                   <label>Emal</label>
                   <input
                     type="text"
-                    name="username"
+                    name="email"
                     placeholder="johnsmith@gmail.com"
                     required
                   />
+                  <% if (typeof errors !== 'undefined') { %>
+                  <small class="text-danger"><%= errors.gen %></small>
+
+                  <% } %>
                 </div>
 
                 <div class="form-group">
@@ -95,6 +107,10 @@
                     value=""
                     placeholder="Password"
                   />
+                  <% if (typeof errors !== 'undefined') { %>
+                  <small class="text-danger"><%= errors.gen %></small>
+
+                  <% } %>
                 </div>
 
                 <div class="form-group">
@@ -116,13 +132,16 @@
                 </div>
 
                 <div class="form-group">
-                  <button
+                  <input
                     class="theme-btn btn-style-one"
                     type="submit"
-                    name="log-in"
-                  >
-                    Log In
-                  </button>
+                    value="Log In"
+                  />
+                </div>
+                <div class="bottom-box">
+                  <div class="text">
+                    Don't have an account? <a href="/user/register">Sign Up</a>
+                  </div>
                 </div>
               </form>
             </div>

@@ -25,8 +25,12 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    role: {
+    address: {
       type: String,
+      required: true,
+    },
+    phone: {
+      type: Number,
       required: true,
     },
     auth: {
