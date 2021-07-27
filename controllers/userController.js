@@ -1,5 +1,6 @@
 // importing the required modules
 const { User } = require('../models/users');
+const { Listing } = require('../models/listings');
 const bcrypt = require('bcrypt');
 const auth = require('../middlewares/auth');
 
@@ -166,12 +167,41 @@ const authUser = async (req, res) => {
 // logout user controller
 const logoutUser = (req, res) => {
   console.log(req.session.id);
-  //   req.session.destroy((err) => {
 
-  //   });
   if (req.done) {
     res.redirect('./login');
   }
+  return;
+};
+
+// publish job request
+const requestJob = (req, res) => {
+  // creating the error object
+  errors = {};
+  // getting the form data
+  const body = req.body;
+  console.log(body);
+  // checking for errors in user data
+  if (!body.title || !body.desc) {
+    errors.gen = "This field can't be empty";
+  }
+  if (Object.keys(errors).length > 0) {
+    res.redirect(`./auth`);
+    return;
+  }
+  // checking for errors in user data end
+
+  //   creating the listing object and saving to the database
+  const listing = new Listing(body);
+  try {
+    listing.save();
+  } catch (error) {
+    req.flash('error_msg', 'Something went wrong');
+    res.redirect(`/`);
+    return;
+  }
+  req.flash('success_msg', 'Job request posted successfully!');
+  res.redirect(`/`);
   return;
 };
 
@@ -184,4 +214,5 @@ module.exports = {
   loginUser,
   authController,
   authUser,
+  requestJob,
 };

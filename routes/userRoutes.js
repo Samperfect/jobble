@@ -30,5 +30,8 @@ userRouter.get(
   user.logoutUser
 );
 
+// publish job request get
+userRouter.post('/request', auth.loginRequired, user.requestJob);
+
 // exporting the mainRouter
 module.exports = { userRouter };
