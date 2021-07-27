@@ -96,7 +96,18 @@ const loginUser = async (req, res) => {
     return;
   }
 
-  console.log(existing);
+  // checking if the user password matches
+  const match = await bcrypt.compare(body.password, existing.password);
+
+  if (!match) {
+    req.flash('error_msg', 'Invalid login credentials provided');
+    res.redirect(`./login`);
+    return;
+  }
+
+  // creating the user session
+  req.session.id = existing._id;
+  console.log(req.session);
   res.redirect('/');
   return;
 };
