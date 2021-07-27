@@ -1,5 +1,6 @@
 // defining the homepage controller function
 homepageController = (req, res) => {
+  console.log(req.user);
   res.render('dash');
 };
 

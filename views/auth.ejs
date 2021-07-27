@@ -80,33 +80,16 @@
             <%- include('./partials/flash') %>
 
             <div class="form-inner">
-              <h3>Login to Joble</h3>
+              <h3>2-Factor Authentication Section</h3>
               <!--Login Form-->
-              <form method="post" action="./login">
+              <form method="post" action="./auth">
                 <div class="form-group">
-                  <label>Email</label>
+                  <label>OTP</label>
                   <input
                     type="text"
-                    name="email"
-                    placeholder="johnsmith@gmail.com"
-                    value="lovedayperfection1@gmail.com"
+                    name="otp"
+                    placeholder="Please enter the OTP send to your mail..."
                     required
-                  />
-                  <% if (typeof errors !== 'undefined') { %>
-                  <small class="text-danger"><%= errors.gen %></small>
-
-                  <% } %>
-                </div>
-
-                <div class="form-group">
-                  <label>Password</label>
-                  <input
-                    required
-                    id="password-field"
-                    type="password"
-                    name="password"
-                    value="newpassword"
-                    placeholder="Password"
                   />
                   <% if (typeof errors !== 'undefined') { %>
                   <small class="text-danger"><%= errors.gen %></small>
@@ -118,13 +101,8 @@
                   <input
                     class="theme-btn btn-style-one"
                     type="submit"
-                    value="Log In"
+                    value="Validate Log In"
                   />
-                </div>
-                <div class="bottom-box">
-                  <div class="text">
-                    Don't have an account? <a href="/user/register">Sign Up</a>
-                  </div>
                 </div>
               </form>
             </div>

@@ -1,14 +1,14 @@
+// importing the required modules
 const { User } = require('../models/users');
 const bcrypt = require('bcrypt');
-const { exit } = require('process');
-const { render } = require('ejs');
+const auth = require('../middlewares/auth');
 
-// defining the employer resgier controller
+// defining the register controller
 const registerController = (req, res) => {
   res.render('register');
 };
 
-// defining the employer resgier controller
+// defining the login controller
 const loginController = (req, res) => {
   res.render('login');
 };
@@ -34,7 +34,7 @@ const registerUser = async (req, res) => {
     errors.password = 'Password must be a minimum of 10 characters';
   }
   if (Object.keys(errors).length > 0) {
-    res.redirect(`${req.query.role.toLowerCase()}/register`);
+    res.redirect(`./register`);
     return;
   }
   // checking for errors in user data end
@@ -44,7 +44,7 @@ const registerUser = async (req, res) => {
 
   if (existing) {
     errors.email = 'That email is already in use';
-    res.redirect(`${req.query.role.toLowerCase()}/register`);
+    res.redirect(`./register`);
     return;
   }
 
@@ -59,11 +59,11 @@ const registerUser = async (req, res) => {
       user.save();
     } catch (error) {
       errors.gen = 'Something went wrong';
-      res.redirect(`${req.query.role.toLowerCase()}/register`);
+      res.redirect(`./register`);
       return;
     }
     req.flash('success_msg', 'Account registered successfully!');
-    res.redirect(`${req.query.role.toLowerCase()}/login`);
+    res.redirect(`./login`);
     return;
   });
   return;
@@ -75,7 +75,7 @@ const loginUser = async (req, res) => {
   errors = {};
   // getting the form data
   const body = req.body;
-  console.log(body);
+
   // checking for errors in user data
   if (!body.email || !body.password) {
     errors.gen = "This field can't be empty";
@@ -87,9 +87,9 @@ const loginUser = async (req, res) => {
   // checking for errors in user data end
 
   // checking if the user exits already
-  existing = await User.findOne({ email: body.email });
+  user = await User.findOne({ email: body.email });
 
-  if (!existing) {
+  if (!user) {
     //   errors.email = 'That account does not exist';
     req.flash('error_msg', 'That account does not exist');
     res.redirect(`./login`);
@@ -97,7 +97,7 @@ const loginUser = async (req, res) => {
   }
 
   // checking if the user password matches
-  const match = await bcrypt.compare(body.password, existing.password);
+  const match = await bcrypt.compare(body.password, user.password);
 
   if (!match) {
     req.flash('error_msg', 'Invalid login credentials provided');
@@ -105,9 +105,60 @@ const loginUser = async (req, res) => {
     return;
   }
 
+  const otp = await auth.generateOTP();
+  console.log(otp);
+  user.otp = otp;
+
+  try {
+    await user.save();
+    auth.sendOTP(otp, user);
+  } catch (error) {
+    req.flash('error_msg', 'Something went wrong');
+    res.redirect('./login');
+    return;
+  }
+
+  res.redirect('./auth');
+  return;
+};
+
+// defining the auth user controller
+const authController = (req, res) => {
+  res.render('auth');
+};
+
+// auth user controller
+const authUser = async (req, res) => {
+  // creating the error object
+  errors = {};
+  // getting the form data
+  const body = req.body;
+
+  // checking for errors in user data
+  if (!body.otp) {
+    errors.gen = "This field can't be empty";
+  }
+  if (Object.keys(errors).length > 0) {
+    res.redirect(`./auth`);
+    return;
+  }
+  // checking for errors in user data end
+
+  // checking if the user exits already
+  user = await User.findOne({ otp: body.otp });
+
+  if (!user) {
+    //   errors.email = 'That account does not exist';
+    req.flash('error_msg', 'Invalid OTP Provided');
+    res.redirect(`./login`);
+    return;
+  }
+
+  // destroying the otp
+  user.otp = null;
+  await user.save();
   // creating the user session
-  req.session.id = existing._id;
-  console.log(req.session);
+  auth.initSession(user._id, req.session);
   res.redirect('/');
   return;
 };
@@ -124,4 +175,6 @@ module.exports = {
   registerUser,
   logoutUser,
   loginUser,
+  authController,
+  authUser,
 };

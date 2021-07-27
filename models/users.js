@@ -30,13 +30,12 @@ const userSchema = new Schema(
       required: true,
     },
     phone: {
-      type: Number,
+      type: String,
       required: true,
     },
-    auth: {
-      type: Boolean,
-      required: true,
-      default: false,
+    otp: {
+      type: String,
+      required: false,
     },
   },
   { timestamps: true }
