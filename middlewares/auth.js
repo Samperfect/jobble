@@ -10,8 +10,12 @@ const initSession = (user, session) => {
 
 // login required middleware
 const loginRequired = async (req, res, next) => {
+  if (req.query.encoded) {
+    next();
+    return;
+  }
   if (!req.session.user) {
-    return res.redirect('user/login');
+    return res.redirect('../../user/login');
   }
   // getting the user from the database
   user = await User.findOne({ _id: req.session.user });

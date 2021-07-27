@@ -118,7 +118,7 @@ const loginUser = async (req, res) => {
     return;
   }
 
-  res.redirect('./auth');
+  res.redirect('./auth?encoded=auth');
   return;
 };
 
@@ -165,8 +165,13 @@ const authUser = async (req, res) => {
 
 // logout user controller
 const logoutUser = (req, res) => {
-  req.session.destroy();
-  res.redirect('./login');
+  console.log(req.session.id);
+  //   req.session.destroy((err) => {
+
+  //   });
+  if (req.done) {
+    res.redirect('./login');
+  }
   return;
 };
 

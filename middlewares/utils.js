@@ -13,6 +13,15 @@ const new_session = session({
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
 });
 
+// destroy session
+const destroySession = (req, res, next) => {
+  req.session.destroy(request.sessionID, (err) => {
+    res.redirect('../../user/login');
+    return;
+  });
+  next();
+};
+
 //use flash
 const messages = (req, res, next) => {
   res.locals.success_msg = req.flash('success_msg');
@@ -22,4 +31,4 @@ const messages = (req, res, next) => {
 };
 
 // exporting the utilities modules
-module.exports = { messages, new_session };
+module.exports = { messages, new_session, destroySession };

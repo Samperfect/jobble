@@ -3,19 +3,11 @@ const { Schema } = mongoose;
 
 const listingSchema = new Schema(
   {
-    fname: {
+    title: {
       type: String,
       required: true,
     },
-    lname: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
-    password: {
+    desc: {
       type: String,
       required: true,
     },
