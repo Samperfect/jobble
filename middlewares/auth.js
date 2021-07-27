@@ -19,6 +19,14 @@ const loginRequired = async (req, res, next) => {
   return next();
 };
 
+// already logged in middleware
+const loginRedirect = (req, res, next) => {
+  if (req.session.user) {
+    return res.redirect('/');
+  }
+  next();
+};
+
 // generate otp
 const generateOTP = async () => {
   // generating the otp using Math.random
@@ -51,4 +59,10 @@ const sendOTP = (otp, user) => {
   });
 };
 
-module.exports = { initSession, loginRequired, generateOTP, sendOTP };
+module.exports = {
+  initSession,
+  loginRequired,
+  generateOTP,
+  sendOTP,
+  loginRedirect,
+};

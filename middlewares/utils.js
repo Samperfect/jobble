@@ -1,5 +1,6 @@
 // importing the required modules
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
 //express session
 const new_session = session({
@@ -9,6 +10,7 @@ const new_session = session({
   cookie: {
     maxAge: 24 * 60 * 60 * 1000,
   },
+  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
 });
 
 //use flash
@@ -19,4 +21,5 @@ const messages = (req, res, next) => {
   next();
 };
 
-module.exports = { new_session, messages };
+// exporting the utilities modules
+module.exports = { messages, new_session };

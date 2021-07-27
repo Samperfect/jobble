@@ -164,12 +164,17 @@
                   </div>
 
                   <div class="widget-content">
-                    <form class="default-form">
+                    <form class="default-form" action="./update">
                       <div class="row">
                         <!-- Input -->
                         <div class="form-group col-lg-12 col-md-12">
                           <label>First Name</label>
-                          <input required type="text" name="fname" />
+                          <input
+                            value="<%= user.fname %>"
+                            required
+                            type="text"
+                            name="fname"
+                          />
                           <% if (typeof errors !== 'undefined') { %>
                           <small class="text-danger"><%= errors.gen %></small>
 
@@ -177,7 +182,12 @@
                         </div>
                         <div class="form-group col-lg-12 col-md-12">
                           <label>Last Name</label>
-                          <input required type="text" name="lname" />
+                          <input
+                            value="<%= user.lname %>"
+                            required
+                            type="text"
+                            name="lname"
+                          />
                           <% if (typeof errors !== 'undefined') { %>
                           <small class="text-danger"><%= errors.gen %></small>
 
@@ -185,7 +195,12 @@
                         </div>
                         <div class="form-group col-lg-12 col-md-12">
                           <label>Email</label>
-                          <input required type="email" name="email" />
+                          <input
+                            value="<%= user.email %>"
+                            required
+                            type="email"
+                            name="email"
+                          />
                           <% if (typeof errors !== 'undefined') { %>
                           <small class="text-danger"><%= errors.gen %></small>
 
@@ -193,7 +208,12 @@
                         </div>
                         <div class="form-group col-lg-12 col-md-12">
                           <label>Address</label>
-                          <input required type="text" name="address" />
+                          <input
+                            value="<%= user.address %>"
+                            required
+                            type="text"
+                            name="address"
+                          />
                           <% if (typeof errors !== 'undefined') { %>
                           <small class="text-danger"><%= errors.gen %></small>
 
@@ -201,7 +221,12 @@
                         </div>
                         <div class="form-group col-lg-12 col-md-12">
                           <label>Phone</label>
-                          <input required type="number" name="phone" />
+                          <input
+                            value="<%= user.phone %>"
+                            required
+                            type="text"
+                            name="phone"
+                          />
                           <% if (typeof errors !== 'undefined') { %>
                           <small class="text-danger"><%= errors.gen %></small>
 
@@ -243,7 +268,7 @@
                         <div class="form-group col-lg-12 col-md-12">
                           <label>Job Description</label>
                           <textarea
-                            placeholder="Spent several years working on sheep on Wall Street. Had moderate success investing in Yugo's on Wall Street. Managed a small team buying and selling Pogo sticks for farmers. Spent several years licensing licorice in West Palm Beach, FL. Developed several new methods for working it banjos in the aftermarket. Spent a weekend importing banjos in West Palm Beach, FL.In this position, the Software Engineer collaborates with Evention's Development team to continuously enhance our current software solutions as well as create new solutions to eliminate the back-office operations and management challenges present"
+                            placeholder="Spent several years working on sheep on Wall Street. Had moderate success investing in Yugo's on Wall Street. Managed a small team buying and selling Pogo sticks for farmers. Spent several years licensing licorice in West Palm Beach, FL. Developed several new methods for working it banjos in the aftermarket."
                           ></textarea>
                         </div>
 

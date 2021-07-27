@@ -1,4 +1,6 @@
+// importing the required modules
 const express = require('express');
+const auth = require('../middlewares/auth');
 
 // creating the router object
 const userRouter = express.Router({ strict: true });
@@ -8,17 +10,17 @@ const user = require('../controllers/userController');
 
 // defining the routes
 // register user get
-userRouter.get('/register', user.registerController);
+userRouter.get('/register', auth.loginRedirect, user.registerController);
 // login user get
-userRouter.get('/login', user.loginController);
+userRouter.get('/login', auth.loginRedirect, user.loginController);
 // register user post
-userRouter.post('/register', user.registerUser);
+userRouter.post('/register', auth.loginRedirect, user.registerUser);
 // login user post
-userRouter.post('/login', user.loginUser);
+userRouter.post('/login', auth.loginRedirect, user.loginUser);
 // authenticate user get
-userRouter.get('/auth', user.authController);
+userRouter.get('/auth', auth.loginRedirect, user.authController);
 // authenticate user post
-userRouter.post('/auth', user.authUser);
+userRouter.post('/auth', auth.loginRedirect, user.authUser);
 
 // exporting the mainRouter
 module.exports = { userRouter };

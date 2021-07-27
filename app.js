@@ -8,17 +8,16 @@ const https = require('https');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('connect-flash');
+const MongoStore = require('connect-mongo');
 // requiring the needed modules end
 
 // getting the environment variables
 port = process.env.PORT || 5000;
+dbURI = process.env.MONGO_URI;
 // getting the environment variables end
 
 // connecting to the database
-dbURI =
-  'mongodb+srv://veehuelabs:admin@veehuelabs.com@veehue.eaigm.mongodb.net/joble?retryWrites=true&w=majority';
-
-mongoose
+const getDB = mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
     // listening for server call on PORT
@@ -27,6 +26,7 @@ mongoose
     });
   })
   .catch((error) => console.log(error));
+
 // connecting to the database end
 
 // getting the express routers
@@ -51,6 +51,7 @@ app.use(express.json());
 // requiring external middile wares
 const utils = require('./middlewares/utils');
 
+// using external middlewares
 app.use(utils.new_session);
 app.use(flash());
 app.use(utils.messages);

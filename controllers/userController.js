@@ -106,7 +106,7 @@ const loginUser = async (req, res) => {
   }
 
   const otp = await auth.generateOTP();
-  console.log(otp);
+
   user.otp = otp;
 
   try {

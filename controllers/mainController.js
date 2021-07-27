@@ -1,7 +1,6 @@
 // defining the homepage controller function
 homepageController = (req, res) => {
-  console.log(req.user);
-  res.render('dash');
+  res.render('dash', { user: req.user });
 };
 
 // the listings controller function
