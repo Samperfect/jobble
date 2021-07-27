@@ -87,7 +87,9 @@
 
             <div class="outer-box">
               <li class="current">
-                <a href="#" class="theme-btn btn-style-one">Logout</a>
+                <a href="/user/logout" class="theme-btn btn-style-one"
+                  >Logout</a
+                >
               </li>
 
               <!-- Dashboard Option -->
@@ -256,6 +258,8 @@
                   </div>
 
                   <div class="widget-content">
+                    <%- include('./partials/flash') %>
+
                     <form class="default-form">
                       <div class="row">
                         <!-- Input -->

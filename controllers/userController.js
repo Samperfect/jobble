@@ -165,6 +165,8 @@ const authUser = async (req, res) => {
 
 // logout user controller
 const logoutUser = (req, res) => {
+  req.session.destroy();
+  res.redirect('./login');
   return;
 };
 

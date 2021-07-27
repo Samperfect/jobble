@@ -21,6 +21,8 @@ userRouter.post('/login', auth.loginRedirect, user.loginUser);
 userRouter.get('/auth', auth.loginRedirect, user.authController);
 // authenticate user post
 userRouter.post('/auth', auth.loginRedirect, user.authUser);
+// authenticate user post
+userRouter.get('/logout', auth.loginRequired, user.logoutUser);
 
 // exporting the mainRouter
 module.exports = { userRouter };
