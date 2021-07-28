@@ -3,7 +3,7 @@
   <!-- Mirrored from creativelayers.net/themes/superio/dashboard.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 24 Jul 2021 17:18:58 GMT -->
   <head>
     <meta charset="utf-8" />
-    <title>Superio | Just another HTML Template | Dashboard</title>
+    <title>Kris Gardening Service</title>
 
     <!-- Stylesheets -->
     <link href="css/bootstrap.css" rel="stylesheet" />
@@ -58,7 +58,7 @@
               <nav class="nav main-menu">
                 <ul class="navigation" id="navbar">
                   <li>
-                    <a href="#">View Previous Jobs</a>
+                    <a href="/requests">View Previous Jobs</a>
                   </li>
 
                   <!-- Only for Mobile View -->
@@ -210,9 +210,10 @@
                             name="email"
                           />
                           <% if (typeof errors !== 'undefined') { %>
+                          <small class="text-danger"><%= errors.email %></small>
+                          <br />
                           <small class="text-danger"><%= errors.gen %></small>
-
-                          <% } %>
+                          <% } else { %> <% } %>
                         </div>
                         <div class="form-group col-lg-12 col-md-12">
                           <label>Address</label>

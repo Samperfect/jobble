@@ -15,13 +15,10 @@ const new_session = session({
 
 // destroy session
 const destroySession = (req, res, next) => {
-  console.log(req.session.id);
-  console.log(req.sessionID);
-  req.session.destroy(request.sessionID, (err) => {
+  req.session.destroy((err) => {
     res.redirect('../../user/login');
     return;
   });
-  next();
 };
 
 //use flash

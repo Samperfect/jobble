@@ -30,8 +30,11 @@ userRouter.get(
   user.logoutUser
 );
 
-// publish job request get
+// publish job request post
 userRouter.post('/request', auth.loginRequired, user.requestJob);
+
+// update user profile post
+userRouter.post('/update', auth.loginRequired, user.updateUser);
 
 // exporting the mainRouter
 module.exports = { userRouter };
