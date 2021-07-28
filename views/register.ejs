@@ -110,13 +110,7 @@
 
                 <div class="form-group">
                   <label>First Name</label>
-                  <input
-                    type="text"
-                    name="fname"
-                    placeholder="John"
-                    required
-                    value="John"
-                  />
+                  <input type="text" name="fname" placeholder="John" required />
                   <% if (typeof errors !== 'undefined') { %>
                   <small class="text-danger"><%= errors.gen %></small>
 
@@ -130,7 +124,6 @@
                     name="lname"
                     placeholder="Smith"
                     required
-                    value="Smith"
                   />
                   <% if (typeof errors !== 'undefined') { %>
                   <small class="text-danger"><%= errors.gen %></small>
@@ -144,7 +137,6 @@
                     name="email"
                     placeholder="johnsmith@gmail.com"
                     required
-                    value="lovedayperfection1@gmail.com"
                   />
                   <% if (typeof errors !== 'undefined') { %>
                   <small class="text-danger"><%= errors.email %></small>
@@ -160,7 +152,6 @@
                     name="phone"
                     placeholder="+44 1423 396979"
                     required
-                    value="+44 1423 396979"
                   />
                   <% if (typeof errors !== 'undefined') { %>
 
@@ -176,7 +167,6 @@
                     name="address"
                     placeholder="10 Downing Street"
                     required
-                    value="10 Downing Street"
                   />
                   <% if (typeof errors !== 'undefined') { %>
 
@@ -192,7 +182,6 @@
                     id="password-field"
                     type="password"
                     name="password"
-                    value="newpassword"
                     placeholder="Password"
                   />
                   <% if (typeof errors !== 'undefined') { %>
