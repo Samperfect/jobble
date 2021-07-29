@@ -67,7 +67,5 @@ app.use('/user', userRouter);
 
 // handling 404 errors
 app.all('*', (req, res) => {
-  res
-    .status(404)
-    .send('<h1>That page does not exist</h1> <br /> <a href="/">Go home</a>');
+  res.status(404).render('error');
 });
