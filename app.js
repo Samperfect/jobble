@@ -12,7 +12,7 @@ const MongoStore = require('connect-mongo');
 // requiring the needed modules end
 
 // getting the environment variables
-port = process.env.PORT || 5000;
+port = process.env.PORT || 5500;
 dbURI = process.env.MONGO_URI;
 // getting the environment variables end
 
@@ -21,7 +21,7 @@ const getDB = mongoose
   .connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((result) => {
     // listening for server call on PORT
-    server.listen(port, () => {
+    app.listen(port, () => {
       console.log('listening on port ' + port + '......');
     });
   })
@@ -57,7 +57,7 @@ app.use(flash());
 app.use(utils.messages);
 
 // creating an express https server
-const server = https.createServer({ key: key, cert: cert }, app);
+// const server = https.createServer({ key: key, cert: cert }, app);
 
 // Everything relating to the main page components
 app.use(mainRouter);

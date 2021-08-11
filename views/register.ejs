@@ -184,6 +184,9 @@
                     name="password"
                     placeholder="Password"
                   />
+                  <small class="text-success"
+                    >password must be at least 10 characters long</small
+                  >
                   <% if (typeof errors !== 'undefined') { %>
                   <small class="text-danger"><%= errors.password %></small>
                   <br />
